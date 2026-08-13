@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Quest Unlocked 🎁</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at 50% 40%,
+                    rgba(255,150,220,0.18),
+                    transparent 35%
+                ),
+
+                #08080d;
+
+            color: white;
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 20px;
+
+            overflow: hidden;
+
+        }
+
+
+        /* =========================
+           BACKGROUND PARTICLES
+        ========================= */
+
+        .particle {
+
+            position: fixed;
+
+            font-size: 14px;
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            animation:
+                float 6s linear infinite;
+
+        }
+
+
+        .particle:nth-child(1) {
+
+            left: 10%;
+
+            animation-delay: 0s;
+
+        }
+
+
+        .particle:nth-child(2) {
+
+            left: 25%;
+
+            animation-delay: 1.5s;
+
+        }
+
+
+        .particle:nth-child(3) {
+
+            left: 50%;
+
+            animation-delay: 3s;
+
+        }
+
+
+        .particle:nth-child(4) {
+
+            left: 75%;
+
+            animation-delay: 2s;
+
+        }
+
+
+        .particle:nth-child(5) {
+
+            left: 90%;
+
+            animation-delay: 4s;
+
+        }
+
+
+        @keyframes float {
+
+            0% {
+
+                bottom: -30px;
+
+                opacity: 0;
+
+                transform:
+                    translateX(0)
+                    rotate(0deg);
+
+            }
+
+            15% {
+
+                opacity: 0.7;
+
+            }
+
+            80% {
+
+                opacity: 0.4;
+
+            }
+
+            100% {
+
+                bottom: 110%;
+
+                opacity: 0;
+
+                transform:
+                    translateX(30px)
+                    rotate(30deg);
+
+            }
+
+        }
+
+
+        /* =========================
+           MAIN CARD
+        ========================= */
+
+        .card {
+
+            width:
+                min(700px, 94%);
+
+            padding: 3px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff,
+                    #ff9cda,
+                    #9ed6ff,
+                    #ffffff
+                );
+
+            border-radius: 14px;
+
+            box-shadow:
+                0 0 40px
+                rgba(255,150,220,0.25);
+
+            animation:
+                appear 1s ease;
+
+        }
+
+
+        @keyframes appear {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    scale(0.92);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    scale(1);
+
+            }
+
+        }
+
+
+        .inner {
+
+            background:
+                rgba(9,9,15,0.98);
+
+            border-radius: 11px;
+
+            padding:
+                55px 40px;
+
+            text-align: center;
+
+        }
+
+
+        /* =========================
+           ICON
+        ========================= */
+
+        .icon {
+
+            font-size: 60px;
+
+            animation:
+                bounce 1.8s ease-in-out infinite;
+
+        }
+
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+
+                transform:
+                    translateY(0)
+                    rotate(0deg);
+
+            }
+
+            50% {
+
+                transform:
+                    translateY(-10px)
+                    rotate(5deg);
+
+            }
+
+        }
+
+
+        /* =========================
+           LABEL
+        ========================= */
+
+        .label {
+
+            margin-top: 20px;
+
+            color:
+                #ff9cda;
+
+            font-size: 10px;
+
+            letter-spacing: 4px;
+
+        }
+
+
+        /* =========================
+           TITLE
+        ========================= */
+
+        h1 {
+
+            margin:
+                18px 0 8px;
+
+            font-size:
+                clamp(30px, 6vw, 52px);
+
+            font-weight:
+                normal;
+
+            letter-spacing: 3px;
+
+        }
+
+
+        .subtitle {
+
+            color:
+                #666;
+
+            font-size:
+                11px;
+
+            letter-spacing:
+                2px;
+
+        }
+
+
+        /* =========================
+           TERMINAL
+        ========================= */
+
+        .terminal {
+
+            margin:
+                35px auto 0;
+
+            max-width:
+                530px;
+
+            padding:
+                22px;
+
+            background:
+                rgba(255,255,255,0.025);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.08);
+
+            border-radius:
+                6px;
+
+            text-align:
+                left;
+
+            font-size:
+                11px;
+
+            line-height:
+                2;
+
+            color:
+                #666;
+
+        }
+
+
+        .green {
+
+            color:
+                #9ff0b8;
+
+        }
+
+
+        .pink {
+
+            color:
+                #ff9cda;
+
+        }
+
+
+        .white {
+
+            color:
+                #eee;
+
+        }
+
+
+        /* =========================
+           GAME BOX
+        ========================= */
+
+        .game-box {
+
+            margin-top:
+                30px;
+
+            padding:
+                20px;
+
+            border:
+                1px dashed
+                rgba(255,156,218,0.25);
+
+            border-radius:
+                6px;
+
+            background:
+                rgba(255,156,218,0.025);
+
+        }
+
+
+        .game-title {
+
+            color:
+                #eee;
+
+            font-size:
+                14px;
+
+            letter-spacing:
+                2px;
+
+        }
+
+
+        .game-description {
+
+            margin-top:
+                10px;
+
+            color:
+                #666;
+
+            font-size:
+                10px;
+
+            line-height:
+                1.8;
+
+        }
+
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .button {
+
+            margin-top:
+                30px;
+
+            padding:
+                15px 35px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.4);
+
+            border-radius:
+                6px;
+
+            background:
+                rgba(255,255,255,0.04);
+
+            color:
+                white;
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            font-size:
+                12px;
+
+            letter-spacing:
+                3px;
+
+            cursor:
+                pointer;
+
+            transition:
+                0.25s ease;
+
+        }
+
+
+        .button:hover {
+
+            transform:
+                translateY(-4px)
+                scale(1.02);
+
+            background:
+                rgba(255,150,220,0.12);
+
+            box-shadow:
+                0 0 25px
+                rgba(255,150,220,0.3);
+
+        }
+
+
+        .footer {
+
+            margin-top:
+                28px;
+
+            color:
+                #333;
+
+            font-size:
+                9px;
+
+            letter-spacing:
+                2px;
+
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .inner {
+
+                padding:
+                    45px 20px;
+
+            }
+
+
+            .icon {
+
+                font-size:
+                    50px;
+
+            }
+
+
+            .terminal {
+
+                font-size:
+                    9px;
+
+                padding:
+                    17px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- PARTICLES -->
+
+    <div class="particle">♡</div>
+
+    <div class="particle">✦</div>
+
+    <div class="particle">♡</div>
+
+    <div class="particle">✦</div>
+
+    <div class="particle">♡</div>
+
+
+
+    <!-- CARD -->
+
+    <div class="card">
+
+        <div class="inner">
+
+
+            <div class="icon">
+                🎁
+            </div>
+
+
+            <div class="label">
+                SYSTEM STATUS // COMPLETE
+            </div>
+
+
+            <h1>
+                QUEST UNLOCKED
+            </h1>
+
+
+            <div class="subtitle">
+                congratulations, birthday boy.
+            </div>
+
+
+
+            <!-- TERMINAL -->
+
+            <div class="terminal">
+
+
+                <div>
+                    > scanning archive...
+                </div>
+
+
+                <div>
+                    > verifying recipient...
+                </div>
+
+
+                <div class="green">
+                    > recipient confirmed: IMANEL
+                </div>
+
+
+                <div>
+                    > checking quest status...
+                </div>
+
+
+                <div class="pink">
+                    > all levels completed.
+                </div>
+
+
+                <div class="white">
+                    > final reward unlocked.
+                </div>
+
+
+                <div class="green">
+                    > system says: go get your gift.
+                </div>
+
+
+            </div>
+
+
+
+            <!-- GAME -->
+
+            <div class="game-box">
+
+
+                <div class="game-title">
+                    🎮 BIRTHDAY QUEST
+                </div>
+
+
+                <div class="game-description">
+
+                    You solved the clues.
+
+                    <br>
+
+                    You found the files.
+
+                    <br>
+
+                    You survived the mighty cat.
+
+                    <br><br>
+
+                    Now there's only one thing left.
+
+                    <br>
+
+                    <span class="pink">
+                        Open the actual quest.
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- BUTTON -->
+
+            <button
+                class="button"
+                onclick="openGame()">
+
+                [ OPEN YOUR GIFT 🎁 ]
+
+            </button>
+
+
+
+            <div class="footer">
+
+                END OF WEB QUEST // BEGINNING OF SOMETHING ELSE
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+
+        function openGame() {
+
+            /*
+             * NANTI BAGIAN INI AKAN
+             * KITA HUBUNGKAN KE GAME / EXE.
+             */
+
+            alert(
+                "THE GAME IS WAITING FOR YOU 😼🎁"
+            );
+
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>

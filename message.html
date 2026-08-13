@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Secret Cat Message 🐈</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(255,150,220,0.16),
+                    transparent 35%
+                ),
+
+                radial-gradient(
+                    circle at 80% 80%,
+                    rgba(140,190,255,0.10),
+                    transparent 32%
+                ),
+
+                #08080d;
+
+            color: white;
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 20px;
+
+            overflow-x: hidden;
+
+        }
+
+
+        /* =========================
+           FLOATING HEARTS
+        ========================= */
+
+        .heart {
+
+            position: fixed;
+
+            font-size: 18px;
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            animation:
+                floatHeart 5s linear infinite;
+
+        }
+
+
+        .heart:nth-child(1) {
+
+            left: 8%;
+
+            animation-delay: 0s;
+
+        }
+
+
+        .heart:nth-child(2) {
+
+            left: 25%;
+
+            animation-delay: 2s;
+
+        }
+
+
+        .heart:nth-child(3) {
+
+            left: 72%;
+
+            animation-delay: 1s;
+
+        }
+
+
+        .heart:nth-child(4) {
+
+            left: 90%;
+
+            animation-delay: 3s;
+
+        }
+
+
+        @keyframes floatHeart {
+
+            0% {
+
+                bottom: -30px;
+
+                opacity: 0;
+
+                transform:
+                    translateX(0)
+                    rotate(0deg);
+
+            }
+
+            15% {
+
+                opacity: 0.7;
+
+            }
+
+            80% {
+
+                opacity: 0.5;
+
+            }
+
+            100% {
+
+                bottom: 110%;
+
+                opacity: 0;
+
+                transform:
+                    translateX(40px)
+                    rotate(20deg);
+
+            }
+
+        }
+
+
+        /* =========================
+           CARD
+        ========================= */
+
+        .card {
+
+            width:
+                min(700px, 94%);
+
+            padding: 3px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff,
+                    #ff9cda,
+                    #9ed6ff,
+                    #ffffff
+                );
+
+            border-radius: 14px;
+
+            box-shadow:
+                0 0 35px
+                rgba(255,150,220,0.2);
+
+            animation:
+                appear 0.9s ease;
+
+        }
+
+
+        @keyframes appear {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(20px)
+                    scale(0.97);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+
+            }
+
+        }
+
+
+        .inner {
+
+            background:
+                rgba(10,10,16,0.98);
+
+            border-radius: 11px;
+
+            padding:
+                45px 40px;
+
+        }
+
+
+        /* =========================
+           CAT
+        ========================= */
+
+        .cat {
+
+            text-align: center;
+
+            font-size: 45px;
+
+            margin-bottom: 15px;
+
+            animation:
+                catBounce 2s ease-in-out infinite;
+
+        }
+
+
+        @keyframes catBounce {
+
+            0%,
+            100% {
+
+                transform:
+                    translateY(0)
+                    rotate(0deg);
+
+            }
+
+            50% {
+
+                transform:
+                    translateY(-7px)
+                    rotate(3deg);
+
+            }
+
+        }
+
+
+        /* =========================
+           SECRET LABEL
+        ========================= */
+
+        .label {
+
+            text-align: center;
+
+            color:
+                #ff9cda;
+
+            font-size: 11px;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .unauthorized {
+
+            text-align: center;
+
+            margin-bottom: 30px;
+
+            color: #555;
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            animation:
+                glitchText 2.5s infinite;
+
+        }
+
+
+        @keyframes glitchText {
+
+            0%,
+            88%,
+            100% {
+
+                opacity: 1;
+
+                transform:
+                    translateX(0);
+
+            }
+
+            90% {
+
+                opacity: 0.4;
+
+                transform:
+                    translateX(-2px);
+
+            }
+
+            92% {
+
+                opacity: 1;
+
+                transform:
+                    translateX(2px);
+
+            }
+
+            94% {
+
+                opacity: 0.5;
+
+                transform:
+                    translateX(0);
+
+            }
+
+        }
+
+
+        /* =========================
+           CHAT BOX
+        ========================= */
+
+        .chat {
+
+            margin-top: 20px;
+
+            padding:
+                25px;
+
+            background:
+                rgba(255,255,255,0.025);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.08);
+
+            border-radius: 8px;
+
+            font-size: 13px;
+
+            line-height: 1.9;
+
+            color: #999;
+
+        }
+
+
+        .line {
+
+            margin-bottom: 20px;
+
+            opacity: 0;
+
+            transform:
+                translateY(8px);
+
+            animation:
+                revealLine
+                0.7s ease
+                forwards;
+
+        }
+
+
+        .line:last-child {
+
+            margin-bottom: 0;
+
+        }
+
+
+        .line:nth-child(1) {
+
+            animation-delay:
+                0.5s;
+
+        }
+
+
+        .line:nth-child(2) {
+
+            animation-delay:
+                1.2s;
+
+        }
+
+
+        .line:nth-child(3) {
+
+            animation-delay:
+                1.9s;
+
+        }
+
+
+        .line:nth-child(4) {
+
+            animation-delay:
+                2.6s;
+
+        }
+
+
+        .line:nth-child(5) {
+
+            animation-delay:
+                3.3s;
+
+        }
+
+
+        .line:nth-child(6) {
+
+            animation-delay:
+                4s;
+
+        }
+
+
+        .line:nth-child(7) {
+
+            animation-delay:
+                4.7s;
+
+        }
+
+
+        @keyframes revealLine {
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+
+            }
+
+        }
+
+
+        /* =========================
+           TEXT COLORS
+        ========================= */
+
+        .pink {
+
+            color:
+                #ff9cda;
+
+        }
+
+
+        .blue {
+
+            color:
+                #9ed6ff;
+
+        }
+
+
+        .white {
+
+            color:
+                #eee;
+
+        }
+
+
+        .big {
+
+            font-size: 15px;
+
+        }
+
+
+        /* =========================
+           SIGNATURE
+        ========================= */
+
+        .signature {
+
+            margin-top: 30px;
+
+            padding-top: 20px;
+
+            border-top:
+                1px dashed
+                rgba(255,255,255,0.08);
+
+            text-align: center;
+
+            color: #555;
+
+            font-size: 10px;
+
+            line-height: 1.9;
+
+        }
+
+
+        .signature strong {
+
+            color:
+                #ff9cda;
+
+            font-weight: normal;
+
+        }
+
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .button-area {
+
+            text-align: center;
+
+            margin-top: 30px;
+
+        }
+
+
+        .button {
+
+            padding:
+                14px 30px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.35);
+
+            border-radius: 6px;
+
+            background:
+                rgba(255,255,255,0.035);
+
+            color: white;
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+            cursor: pointer;
+
+            transition:
+                0.2s ease;
+
+        }
+
+
+        .button:hover {
+
+            transform:
+                translateY(-3px)
+                rotate(-1deg);
+
+            background:
+                rgba(255,150,220,0.1);
+
+            box-shadow:
+                0 0 20px
+                rgba(255,150,220,0.25);
+
+        }
+
+
+        .footer {
+
+            margin-top: 25px;
+
+            text-align: center;
+
+            color: #333;
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .inner {
+
+                padding:
+                    40px 20px;
+
+            }
+
+
+            .chat {
+
+                padding:
+                    20px;
+
+                font-size:
+                    12px;
+
+            }
+
+
+            .cat {
+
+                font-size:
+                    38px;
+
+            }
+
+
+            .label {
+
+                font-size:
+                    9px;
+
+                letter-spacing:
+                    2px;
+
+            }
+
+
+            .unauthorized {
+
+                font-size:
+                    8px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- FLOATING HEARTS -->
+
+    <div class="heart">♡</div>
+
+    <div class="heart">♡</div>
+
+    <div class="heart">♡</div>
+
+    <div class="heart">♡</div>
+
+
+
+    <!-- MAIN CARD -->
+
+    <div class="card">
+
+        <div class="inner">
+
+
+            <!-- CAT -->
+
+            <div class="cat">
+                🐈
+            </div>
+
+
+            <!-- SECRET HEADER -->
+
+            <div class="label">
+                !!! SECRET CAT MESSAGE !!!
+            </div>
+
+
+            <div class="unauthorized">
+                [ unauthorized recipient detected ]
+            </div>
+
+
+
+            <!-- CHAT -->
+
+            <div class="chat">
+
+
+                <div class="line big">
+
+                    <span class="pink">
+                        HIYAAAA!!!!
+                    </span>
+
+                    😭😭
+
+                    <br>
+
+                    omg you're already here????
+
+                </div>
+
+
+                <div class="line">
+
+                    wowwwww you must be sooo
+                    surprised with this, right??
+
+                    <br>
+
+                    <span class="white">
+                        RIGHTTT??? RIGHTTTT??? 👀👉👈
+                    </span>
+
+                </div>
+
+
+                <div class="line">
+
+                    ngehehehehehehe 😼
+
+                    <br>
+
+                    this mighty little cat has been
+                    secretly making all of this
+                    just for yaaaaa~ 🐈✨
+
+                </div>
+
+
+                <div class="line">
+
+                    and you actually found it???
+
+                    <br>
+
+                    <span class="pink">
+                        HOW DARE YOU BE THIS GOOD
+                        AT FINDING THINGS 😭
+                    </span>
+
+                </div>
+
+
+                <div class="line">
+
+                    don't cryyyyyy!!!
+
+                    <br>
+
+                    <span class="blue">
+                        (i know you're crying because
+                        you feel touched now)
+                    </span>
+
+                    🥺👉👈
+
+                    <br>
+
+                    (yes. yes you are.)
+
+                </div>
+
+
+                <div class="line">
+
+                    <span class="white">
+                        I CAN FEEL THE TEARS
+                        FROM HERE.
+                    </span>
+
+                    😭👉👈
+
+                </div>
+
+
+                <div class="line">
+
+                    anywayyyy...
+
+                    <br>
+
+                    before you get too emotional...
+
+                    <br><br>
+
+                    <span class="pink big">
+                        there's still something
+                        waiting for you. 👀🎁
+                    </span>
+
+                    <br><br>
+
+                    soooo...
+
+                    <br>
+
+                    <span class="white big">
+                        are you ready, birthday boy? 😼💗
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- SIGNATURE -->
+
+            <div class="signature">
+
+                made with questionable coding skills,
+
+                <br>
+
+                too much love,
+
+                <br>
+
+                and probably too many cats 🐈
+
+                <br><br>
+
+                <strong>
+                    — your mighty little cat 😼
+                </strong>
+
+            </div>
+
+
+
+            <!-- BUTTON -->
+
+            <div class="button-area">
+
+                <button
+                    class="button"
+                    onclick="continueQuest()">
+
+                    [ THERE'S MORE 👀 ]
+
+                </button>
+
+            </div>
+
+
+
+            <div class="footer">
+
+                MESSAGE // PRIVATE // 0909
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+
+        function continueQuest() {
+
+            document.body.style.transition =
+                "opacity 0.8s ease";
+
+            document.body.style.opacity =
+                "0";
+
+
+            setTimeout(() => {
+
+                window.location.href =
+                    "final.html";
+
+            }, 800);
+
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>

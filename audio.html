@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Level 03 // Unknown Audio</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(255,120,200,0.13),
+                    transparent 30%
+                ),
+
+                radial-gradient(
+                    circle at 80% 80%,
+                    rgba(100,180,255,0.10),
+                    transparent 30%
+                ),
+
+                #08080d;
+
+            color: white;
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 20px;
+
+            overflow: hidden;
+
+        }
+
+
+        /* SCANLINES */
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                repeating-linear-gradient(
+                    to bottom,
+                    rgba(255,255,255,0.025)
+                    0px,
+
+                    rgba(255,255,255,0.025)
+                    1px,
+
+                    transparent
+                    1px,
+
+                    transparent
+                    4px
+                );
+
+            pointer-events: none;
+
+            z-index: 100;
+
+        }
+
+
+        /* WINDOW */
+
+        .window {
+
+            width:
+                min(720px, 94%);
+
+            padding: 3px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff,
+                    #ff8fd8,
+                    #8ac7ff,
+                    #ffffff
+                );
+
+            border-radius: 10px;
+
+            box-shadow:
+                0 0 25px
+                rgba(255,120,220,0.2),
+
+                0 0 60px
+                rgba(100,180,255,0.1);
+
+            animation:
+                appear 0.8s ease;
+
+        }
+
+
+        @keyframes appear {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    scale(0.96)
+                    translateY(15px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    scale(1)
+                    translateY(0);
+
+            }
+
+        }
+
+
+        .window-inner {
+
+            background:
+                rgba(10,10,17,0.97);
+
+            border-radius: 7px;
+
+            overflow: hidden;
+
+        }
+
+
+        /* TOP BAR */
+
+        .topbar {
+
+            height: 38px;
+
+            padding:
+                0 14px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #171722,
+                    #252537
+                );
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.08);
+
+            font-size: 12px;
+
+            color: #aaa;
+
+        }
+
+
+        .dots {
+
+            display: flex;
+
+            gap: 6px;
+
+        }
+
+
+        .dot {
+
+            width: 9px;
+
+            height: 9px;
+
+            border-radius: 50%;
+
+            background: #777;
+
+        }
+
+
+        /* CONTENT */
+
+        .content {
+
+            padding:
+                55px 35px 45px;
+
+            text-align: center;
+
+        }
+
+
+        .level {
+
+            display: inline-block;
+
+            padding:
+                7px 14px;
+
+            border:
+                1px solid
+                rgba(138,199,255,0.35);
+
+            border-radius: 4px;
+
+            color: #8ac7ff;
+
+            font-size: 11px;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .level::before {
+
+            content:
+                "● ";
+
+            color:
+                #ff9cda;
+
+        }
+
+
+        .title {
+
+            margin: 0;
+
+            font-size:
+                clamp(25px, 5vw, 42px);
+
+            letter-spacing: 3px;
+
+            font-weight: normal;
+
+        }
+
+
+        .subtitle {
+
+            margin-top: 10px;
+
+            color: #666;
+
+            font-size: 12px;
+
+            letter-spacing: 2px;
+
+        }
+
+
+        /* AUDIO FILE */
+
+        .audio-file {
+
+            margin:
+                35px auto 0;
+
+            max-width: 520px;
+
+            padding: 25px;
+
+            background:
+                rgba(255,255,255,0.025);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.08);
+
+            border-radius: 6px;
+
+        }
+
+
+        .file-icon {
+
+            font-size: 35px;
+
+            margin-bottom: 15px;
+
+            color: #ff9cda;
+
+        }
+
+
+        .filename {
+
+            font-size: 15px;
+
+            color: #eee;
+
+            letter-spacing: 1px;
+
+        }
+
+
+        .metadata {
+
+            margin-top: 15px;
+
+            color: #666;
+
+            font-size: 10px;
+
+            line-height: 2;
+
+        }
+
+
+        .metadata span {
+
+            color: #9ed6ff;
+
+        }
+
+
+        /* AUDIO PLAYER */
+
+        audio {
+
+            width: 100%;
+
+            margin-top: 25px;
+
+        }
+
+
+        audio::-webkit-media-controls-panel {
+
+            background:
+                #20202c;
+
+        }
+
+
+        /* MESSAGE */
+
+        .message {
+
+            margin-top: 25px;
+
+            color: #555;
+
+            font-size: 11px;
+
+            line-height: 1.8;
+
+        }
+
+
+        .message.active {
+
+            color: #aaa;
+
+        }
+
+
+        .message strong {
+
+            color: #ff9cda;
+
+            font-weight: normal;
+
+        }
+
+
+        /* CONTINUE BUTTON */
+
+        .continue {
+
+            margin-top: 30px;
+
+            padding:
+                13px 30px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.4);
+
+            border-radius: 5px;
+
+            background:
+                rgba(255,255,255,0.035);
+
+            color: white;
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            font-size: 12px;
+
+            letter-spacing: 3px;
+
+            cursor: pointer;
+
+            transition:
+                0.2s ease;
+
+            opacity: 0.35;
+
+            pointer-events: none;
+
+        }
+
+
+        .continue.unlocked {
+
+            opacity: 1;
+
+            pointer-events: auto;
+
+        }
+
+
+        .continue.unlocked:hover {
+
+            transform:
+                translateY(-3px);
+
+            background:
+                rgba(255,150,220,0.1);
+
+            box-shadow:
+                0 0 18px
+                rgba(255,150,220,0.25);
+
+        }
+
+
+        .footer {
+
+            margin-top: 25px;
+
+            color: #3f3f46;
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            .content {
+
+                padding:
+                    45px 20px 35px;
+
+            }
+
+
+            .audio-file {
+
+                padding:
+                    18px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="window">
+
+        <div class="window-inner">
+
+
+            <!-- TOP BAR -->
+
+            <div class="topbar">
+
+                <div>
+                    BIRTHDAY_QUEST.exe
+                </div>
+
+
+                <div class="dots">
+
+                    <div class="dot"></div>
+
+                    <div class="dot"></div>
+
+                    <div class="dot"></div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CONTENT -->
+
+            <div class="content">
+
+
+                <div class="level">
+                    LEVEL 03
+                </div>
+
+
+                <h1 class="title">
+                    UNKNOWN AUDIO
+                </h1>
+
+
+                <div class="subtitle">
+                    UNAUTHORIZED FILE DETECTED
+                </div>
+
+
+
+                <!-- AUDIO FILE -->
+
+                <div class="audio-file">
+
+
+                    <div class="file-icon">
+                        ♪
+                    </div>
+
+
+                    <div class="filename">
+                        unknown_0909.mp3
+                    </div>
+
+
+                    <div class="metadata">
+
+                        TYPE:
+                        <span>
+                            AUDIO RECORDING
+                        </span>
+
+                        <br>
+
+                        SOURCE:
+                        <span>
+                            UNKNOWN
+                        </span>
+
+                        <br>
+
+                        STATUS:
+                        <span>
+                            PLAYABLE
+                        </span>
+
+                        <br>
+
+                        CLASSIFICATION:
+                        <span>
+                            UNIDENTIFIED
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- AUDIO -->
+
+                    <audio
+                        id="audio"
+                        controls>
+
+                        <source
+                            src="assets/unknown_0909.mp3"
+                            type="audio/mpeg"
+                        >
+
+                        Your browser does not support
+                        audio playback.
+
+                    </audio>
+
+
+                    <div
+                        class="message"
+                        id="message">
+
+                        > This file was not part
+                        of the original quest.
+
+                        <br>
+
+                        > Play it to continue.
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- CONTINUE -->
+
+                <button
+                    class="continue"
+                    id="continueButton"
+                    onclick="continueQuest()">
+
+                    [ CONTINUE ]
+
+                </button>
+
+
+
+                <div class="footer">
+
+                    AUDIO DATABASE // FILE 001
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+
+        const audio =
+            document.getElementById("audio");
+
+
+        const message =
+            document.getElementById("message");
+
+
+        const continueButton =
+            document.getElementById(
+                "continueButton"
+            );
+
+
+        /*
+         * Saat audio mulai dimainkan.
+         */
+
+        audio.addEventListener(
+            "play",
+            () => {
+
+                message.classList.add(
+                    "active"
+                );
+
+                message.innerHTML =
+                    `
+                    > AUDIO PLAYBACK ACTIVE.
+                    <br>
+                    > Something about this
+                    recording feels familiar...
+                    `;
+
+            }
+        );
+
+
+        /*
+         * Setelah audio selesai.
+         */
+
+        audio.addEventListener(
+            "ended",
+            () => {
+
+                message.innerHTML =
+                    `
+                    > AUDIO ANALYSIS COMPLETE.
+                    <br>
+                    > IDENTITY MATCH:
+                    <strong>100%</strong>
+                    <br>
+                    > ...so it was you.
+                    `;
+
+                continueButton.classList.add(
+                    "unlocked"
+                );
+
+            }
+        );
+
+
+        /*
+         * Lanjut ke level berikutnya.
+         */
+
+        function continueQuest() {
+
+            document.body.style.transition =
+                "opacity 0.8s ease";
+
+            document.body.style.opacity =
+                "0";
+
+
+            setTimeout(() => {
+
+                window.location.href =
+                    "level3.html";
+
+            }, 800);
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

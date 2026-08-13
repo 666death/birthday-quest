@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Level 02 // Player Database</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(255,120,200,0.13),
+                    transparent 30%
+                ),
+
+                radial-gradient(
+                    circle at 80% 80%,
+                    rgba(100,180,255,0.10),
+                    transparent 30%
+                ),
+
+                #08080d;
+
+            color: white;
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 20px;
+
+            overflow: hidden;
+
+        }
+
+
+        /* =========================
+           SCANLINES
+        ========================= */
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                repeating-linear-gradient(
+                    to bottom,
+                    rgba(255,255,255,0.025)
+                    0px,
+
+                    rgba(255,255,255,0.025)
+                    1px,
+
+                    transparent
+                    1px,
+
+                    transparent
+                    4px
+                );
+
+            pointer-events: none;
+
+            z-index: 100;
+
+        }
+
+
+        /* =========================
+           WINDOW
+        ========================= */
+
+        .window {
+
+            width:
+                min(720px, 94%);
+
+            padding: 3px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff,
+                    #ff8fd8,
+                    #8ac7ff,
+                    #ffffff
+                );
+
+            border-radius: 10px;
+
+            box-shadow:
+                0 0 25px
+                rgba(255,120,220,0.2),
+
+                0 0 60px
+                rgba(100,180,255,0.1);
+
+            animation:
+                appear 0.8s ease;
+
+        }
+
+
+        @keyframes appear {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    scale(0.96)
+                    translateY(15px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    scale(1)
+                    translateY(0);
+
+            }
+
+        }
+
+
+        .window-inner {
+
+            background:
+                rgba(10,10,17,0.97);
+
+            border-radius: 7px;
+
+            overflow: hidden;
+
+        }
+
+
+        /* =========================
+           TOP BAR
+        ========================= */
+
+        .topbar {
+
+            height: 38px;
+
+            padding:
+                0 14px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #171722,
+                    #252537
+                );
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.08);
+
+            font-size: 12px;
+
+            color: #aaa;
+
+        }
+
+
+        .dots {
+
+            display: flex;
+
+            gap: 6px;
+
+        }
+
+
+        .dot {
+
+            width: 9px;
+
+            height: 9px;
+
+            border-radius: 50%;
+
+            background: #777;
+
+        }
+
+
+        /* =========================
+           CONTENT
+        ========================= */
+
+        .content {
+
+            padding:
+                55px 35px 45px;
+
+        }
+
+
+        .level {
+
+            display: inline-block;
+
+            padding:
+                7px 14px;
+
+            border:
+                1px solid
+                rgba(138,199,255,0.35);
+
+            border-radius: 4px;
+
+            color: #8ac7ff;
+
+            font-size: 11px;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .level::before {
+
+            content:
+                "● ";
+
+            color:
+                #ff9cda;
+
+        }
+
+
+        .title {
+
+            margin: 0;
+
+            font-size:
+                clamp(25px, 5vw, 42px);
+
+            letter-spacing: 3px;
+
+            font-weight: normal;
+
+        }
+
+
+        .subtitle {
+
+            margin-top: 10px;
+
+            color: #666;
+
+            font-size: 12px;
+
+            letter-spacing: 2px;
+
+        }
+
+
+        /* =========================
+           DATABASE
+        ========================= */
+
+        .database {
+
+            margin-top: 35px;
+
+            padding: 22px;
+
+            background:
+                rgba(255,255,255,0.025);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.08);
+
+            border-radius: 5px;
+
+        }
+
+
+        .database-title {
+
+            color: #777;
+
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            padding: 9px 0;
+
+            border-bottom:
+                1px dashed
+                rgba(255,255,255,0.06);
+
+            font-size: 12px;
+
+        }
+
+
+        .row:last-child {
+
+            border-bottom: none;
+
+        }
+
+
+        .label {
+
+            color: #666;
+
+        }
+
+
+        .value {
+
+            color: #eee;
+
+            text-align: right;
+
+        }
+
+
+        .pink {
+
+            color: #ff9cda;
+
+        }
+
+
+        .blue {
+
+            color: #9ed6ff;
+
+        }
+
+
+        .redacted {
+
+            color: #444;
+
+            letter-spacing: 2px;
+
+        }
+
+
+        /* =========================
+           CORRUPTION
+        ========================= */
+
+        .warning {
+
+            margin-top: 25px;
+
+            padding: 15px;
+
+            border:
+                1px solid
+                rgba(255,156,218,0.15);
+
+            background:
+                rgba(255,156,218,0.035);
+
+            color: #777;
+
+            font-size: 11px;
+
+            line-height: 1.8;
+
+        }
+
+
+        .warning strong {
+
+            color: #ff9cda;
+
+            font-weight: normal;
+
+        }
+
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .button-area {
+
+            text-align: center;
+
+        }
+
+
+        .access {
+
+            margin-top: 30px;
+
+            padding:
+                13px 30px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.4);
+
+            border-radius: 5px;
+
+            background:
+                rgba(255,255,255,0.035);
+
+            color: white;
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            font-size: 12px;
+
+            letter-spacing: 3px;
+
+            cursor: pointer;
+
+            transition:
+                0.2s ease;
+
+        }
+
+
+        .access:hover {
+
+            transform:
+                translateY(-3px);
+
+            background:
+                rgba(255,150,220,0.1);
+
+            box-shadow:
+                0 0 18px
+                rgba(255,150,220,0.25);
+
+        }
+
+
+        .access:active {
+
+            transform:
+                translateY(0);
+
+        }
+
+
+        .footer {
+
+            text-align: center;
+
+            margin-top: 25px;
+
+            color: #3f3f46;
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .content {
+
+                padding:
+                    45px 20px 35px;
+
+            }
+
+
+            .database {
+
+                padding:
+                    16px;
+
+            }
+
+
+            .row {
+
+                font-size:
+                    11px;
+
+                gap: 15px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="window">
+
+        <div class="window-inner">
+
+
+            <!-- TOP BAR -->
+
+            <div class="topbar">
+
+                <div>
+                    BIRTHDAY_QUEST.exe
+                </div>
+
+
+                <div class="dots">
+
+                    <div class="dot"></div>
+
+                    <div class="dot"></div>
+
+                    <div class="dot"></div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CONTENT -->
+
+            <div class="content">
+
+
+                <div class="level">
+                    LEVEL 02
+                </div>
+
+
+                <h1 class="title">
+                    PLAYER DATABASE
+                </h1>
+
+
+                <div class="subtitle">
+                    ACCESSING CLASSIFIED INFORMATION...
+                </div>
+
+
+
+                <!-- DATABASE -->
+
+                <div class="database">
+
+
+                    <div class="database-title">
+                        // PLAYER PROFILE
+                    </div>
+
+
+                    <div class="row">
+
+                        <span class="label">
+                            NAME
+                        </span>
+
+                        <span class="value pink">
+                            IMANEL
+                        </span>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <span class="label">
+                            CLASS
+                        </span>
+
+                        <span class="value">
+                            IT STUDENT
+                        </span>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <span class="label">
+                            MAIN SKILL
+                        </span>
+
+                        <span class="value blue">
+                            MUSIC
+                        </span>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <span class="label">
+                            SIDE QUEST
+                        </span>
+
+                        <span class="value">
+                            CATS
+                        </span>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <span class="label">
+                            BIRTHDAY
+                        </span>
+
+                        <span class="value pink">
+                            09 / 09
+                        </span>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <span class="label">
+                            WEAKNESS
+                        </span>
+
+                        <span class="value redacted">
+                            [ REDACTED ]
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- WARNING -->
+
+                <div class="warning">
+
+                    <strong>
+                        ⚠ DATABASE WARNING
+                    </strong>
+
+                    <br>
+
+                    Some information appears
+                    to be corrupted.
+
+                    <br>
+
+                    Three hidden files were detected.
+
+                    <br>
+
+                    Only one appears to be accessible.
+
+                </div>
+
+
+
+                <!-- BUTTON -->
+
+                <div class="button-area">
+
+                    <button
+                        class="access"
+                        onclick="accessFile()">
+
+                        [ ACCESS FILE ]
+
+                    </button>
+
+                </div>
+
+
+
+                <div class="footer">
+
+                    DATABASE // CLASSIFIED
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+        function accessFile() {
+
+            const button =
+                document.querySelector(".access");
+
+
+            button.textContent =
+                "[ SEARCHING... ]";
+
+
+            button.disabled =
+                true;
+
+
+            setTimeout(() => {
+
+                document.body.style.transition =
+                    "opacity 0.8s ease";
+
+                document.body.style.opacity =
+                    "0";
+
+
+                setTimeout(() => {
+
+                    /*
+                     * HALAMAN AUDIO AKAN
+                     * KITA BUAT SELANJUTNYA.
+                     */
+
+                    window.location.href =
+                        "audio.html";
+
+                }, 800);
+
+            }, 900);
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

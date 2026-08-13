@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Archive 0909</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at 30% 20%,
+                    rgba(255,120,200,0.14),
+                    transparent 32%
+                ),
+
+                radial-gradient(
+                    circle at 75% 75%,
+                    rgba(100,180,255,0.09),
+                    transparent 30%
+                ),
+
+                #08080d;
+
+            color: white;
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 20px;
+
+            overflow: hidden;
+
+        }
+
+
+        /* =========================
+           SCANLINES
+        ========================= */
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                repeating-linear-gradient(
+                    to bottom,
+                    rgba(255,255,255,0.025)
+                    0px,
+
+                    rgba(255,255,255,0.025)
+                    1px,
+
+                    transparent
+                    1px,
+
+                    transparent 4px
+                );
+
+            pointer-events: none;
+
+            z-index: 100;
+
+        }
+
+
+        /* =========================
+           WINDOW
+        ========================= */
+
+        .window {
+
+            width:
+                min(760px, 94%);
+
+            padding: 3px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff,
+                    #ff8fd8,
+                    #8ac7ff,
+                    #ffffff
+                );
+
+            border-radius: 10px;
+
+            box-shadow:
+                0 0 30px
+                rgba(255,120,220,0.2),
+
+                0 0 70px
+                rgba(100,180,255,0.08);
+
+            animation:
+                appear 0.9s ease;
+
+        }
+
+
+        @keyframes appear {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    scale(0.95)
+                    translateY(15px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    scale(1)
+                    translateY(0);
+
+            }
+
+        }
+
+
+        .window-inner {
+
+            background:
+                rgba(9,9,15,0.98);
+
+            border-radius: 7px;
+
+            overflow: hidden;
+
+        }
+
+
+        /* =========================
+           TOP BAR
+        ========================= */
+
+        .topbar {
+
+            height: 38px;
+
+            padding:
+                0 14px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #171722,
+                    #252537
+                );
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.08);
+
+            font-size: 12px;
+
+            color: #aaa;
+
+        }
+
+
+        .dots {
+
+            display: flex;
+
+            gap: 6px;
+
+        }
+
+
+        .dot {
+
+            width: 9px;
+
+            height: 9px;
+
+            border-radius: 50%;
+
+            background: #777;
+
+        }
+
+
+        /* =========================
+           CONTENT
+        ========================= */
+
+        .content {
+
+            padding:
+                55px 35px 50px;
+
+        }
+
+
+        .label {
+
+            display: inline-block;
+
+            padding:
+                7px 14px;
+
+            border:
+                1px solid
+                rgba(255,156,218,0.3);
+
+            border-radius: 4px;
+
+            color: #ff9cda;
+
+            font-size: 11px;
+
+            letter-spacing: 3px;
+
+        }
+
+
+        .label::before {
+
+            content:
+                "● ";
+
+            color:
+                #8ac7ff;
+
+        }
+
+
+        h1 {
+
+            margin:
+                25px 0 8px;
+
+            font-size:
+                clamp(28px, 5vw, 48px);
+
+            font-weight: normal;
+
+            letter-spacing: 5px;
+
+        }
+
+
+        .subtitle {
+
+            color: #555;
+
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+        }
+
+
+        /* =========================
+           ARCHIVE INFO
+        ========================= */
+
+        .archive-box {
+
+            margin-top: 35px;
+
+            padding: 23px;
+
+            background:
+                rgba(255,255,255,0.025);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.08);
+
+            border-radius: 5px;
+
+        }
+
+
+        .row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding:
+                10px 0;
+
+            border-bottom:
+                1px dashed
+                rgba(255,255,255,0.06);
+
+            font-size: 11px;
+
+        }
+
+
+        .row:last-child {
+
+            border-bottom: none;
+
+        }
+
+
+        .key {
+
+            color: #555;
+
+        }
+
+
+        .value {
+
+            color: #ddd;
+
+            text-align: right;
+
+        }
+
+
+        .pink {
+
+            color: #ff9cda;
+
+        }
+
+
+        .blue {
+
+            color: #9ed6ff;
+
+        }
+
+
+        .redacted {
+
+            color: #444;
+
+            letter-spacing: 3px;
+
+        }
+
+
+        /* =========================
+           MESSAGE
+        ========================= */
+
+        .message {
+
+            margin-top: 35px;
+
+            padding:
+                25px;
+
+            border-left:
+                2px solid
+                rgba(255,156,218,0.45);
+
+            background:
+                rgba(255,156,218,0.025);
+
+            color: #777;
+
+            font-size: 12px;
+
+            line-height: 2;
+
+        }
+
+
+        .message strong {
+
+            color: #eee;
+
+            font-weight: normal;
+
+        }
+
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .button-area {
+
+            text-align: center;
+
+        }
+
+
+        .read-button {
+
+            margin-top: 32px;
+
+            padding:
+                13px 30px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.4);
+
+            border-radius: 5px;
+
+            background:
+                rgba(255,255,255,0.035);
+
+            color: white;
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            font-size: 12px;
+
+            letter-spacing: 3px;
+
+            cursor: pointer;
+
+            transition:
+                0.2s ease;
+
+        }
+
+
+        .read-button:hover {
+
+            transform:
+                translateY(-3px);
+
+            background:
+                rgba(255,150,220,0.1);
+
+            box-shadow:
+                0 0 18px
+                rgba(255,150,220,0.25);
+
+        }
+
+
+        .footer {
+
+            margin-top: 25px;
+
+            text-align: center;
+
+            color: #3f3f46;
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .content {
+
+                padding:
+                    45px 20px 40px;
+
+            }
+
+
+            .archive-box {
+
+                padding:
+                    17px;
+
+            }
+
+
+            .row {
+
+                font-size:
+                    10px;
+
+            }
+
+
+            .message {
+
+                padding:
+                    18px;
+
+                font-size:
+                    11px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="window">
+
+        <div class="window-inner">
+
+
+            <!-- TOP BAR -->
+
+            <div class="topbar">
+
+                <div>
+                    BIRTHDAY_QUEST.exe
+                </div>
+
+
+                <div class="dots">
+
+                    <div class="dot"></div>
+
+                    <div class="dot"></div>
+
+                    <div class="dot"></div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CONTENT -->
+
+            <div class="content">
+
+
+                <div class="label">
+                    CLASSIFIED ARCHIVE
+                </div>
+
+
+                <h1>
+                    ARCHIVE 0909
+                </h1>
+
+
+                <div class="subtitle">
+                    PERSONAL DATA // ACCESS GRANTED
+                </div>
+
+
+
+                <!-- INFO -->
+
+                <div class="archive-box">
+
+
+                    <div class="row">
+
+                        <span class="key">
+                            RECIPIENT
+                        </span>
+
+                        <span class="value pink">
+                            IMANEL
+                        </span>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <span class="key">
+                            DATE
+                        </span>
+
+                        <span class="value">
+                            09 / 09
+                        </span>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <span class="key">
+                            PURPOSE
+                        </span>
+
+                        <span class="value">
+                            CLASSIFIED
+                        </span>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <span class="key">
+                            CREATED BY
+                        </span>
+
+                        <span class="value redacted">
+                            █████████
+                        </span>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <span class="key">
+                            STATUS
+                        </span>
+
+                        <span class="value blue">
+                            COMPLETE
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- MESSAGE -->
+
+                <div class="message">
+
+                    > You weren't supposed
+                    to find this yet.
+
+                    <br><br>
+
+                    > But since you're already here...
+
+                    <br><br>
+
+                    <strong>
+                        There's something waiting
+                        for you.
+                    </strong>
+
+                </div>
+
+
+
+                <!-- BUTTON -->
+
+                <div class="button-area">
+
+                    <button
+                        class="read-button"
+                        onclick="readMessage()">
+
+                        [ READ MESSAGE ]
+
+                    </button>
+
+                </div>
+
+
+
+                <div class="footer">
+
+                    ARCHIVE // 0909 // PRIVATE
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+
+        function readMessage() {
+
+            document.body.style.transition =
+                "opacity 0.8s ease";
+
+            document.body.style.opacity =
+                "0";
+
+
+            setTimeout(() => {
+
+                /*
+                 * HALAMAN PESAN AKAN
+                 * KITA BUAT BERIKUTNYA.
+                 */
+
+                window.location.href =
+                    "message.html";
+
+            }, 800);
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
