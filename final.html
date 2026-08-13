@@ -54,10 +54,6 @@
         }
 
 
-        /* =========================
-           BACKGROUND PARTICLES
-        ========================= */
-
         .particle {
 
             position: fixed;
@@ -75,47 +71,32 @@
 
 
         .particle:nth-child(1) {
-
             left: 10%;
-
             animation-delay: 0s;
-
         }
 
 
         .particle:nth-child(2) {
-
             left: 25%;
-
             animation-delay: 1.5s;
-
         }
 
 
         .particle:nth-child(3) {
-
             left: 50%;
-
             animation-delay: 3s;
-
         }
 
 
         .particle:nth-child(4) {
-
             left: 75%;
-
             animation-delay: 2s;
-
         }
 
 
         .particle:nth-child(5) {
-
             left: 90%;
-
             animation-delay: 4s;
-
         }
 
 
@@ -159,10 +140,6 @@
 
         }
 
-
-        /* =========================
-           MAIN CARD
-        ========================= */
 
         .card {
 
@@ -230,10 +207,6 @@
         }
 
 
-        /* =========================
-           ICON
-        ========================= */
-
         .icon {
 
             font-size: 60px;
@@ -266,10 +239,6 @@
         }
 
 
-        /* =========================
-           LABEL
-        ========================= */
-
         .label {
 
             margin-top: 20px;
@@ -283,10 +252,6 @@
 
         }
 
-
-        /* =========================
-           TITLE
-        ========================= */
 
         h1 {
 
@@ -317,10 +282,6 @@
 
         }
 
-
-        /* =========================
-           TERMINAL
-        ========================= */
 
         .terminal {
 
@@ -359,32 +320,19 @@
 
 
         .green {
-
-            color:
-                #9ff0b8;
-
+            color: #9ff0b8;
         }
 
 
         .pink {
-
-            color:
-                #ff9cda;
-
+            color: #ff9cda;
         }
 
 
         .white {
-
-            color:
-                #eee;
-
+            color: #eee;
         }
 
-
-        /* =========================
-           GAME BOX
-        ========================= */
 
         .game-box {
 
@@ -438,11 +386,9 @@
         }
 
 
-        /* =========================
-           BUTTON
-        ========================= */
-
         .button {
+
+            display: inline-block;
 
             margin-top:
                 30px;
@@ -472,6 +418,9 @@
 
             letter-spacing:
                 3px;
+
+            text-decoration:
+                none;
 
             cursor:
                 pointer;
@@ -515,10 +464,6 @@
         }
 
 
-        /* =========================
-           MOBILE
-        ========================= */
-
         @media (max-width: 600px) {
 
             .inner {
@@ -557,8 +502,6 @@
 <body>
 
 
-    <!-- PARTICLES -->
-
     <div class="particle">♡</div>
 
     <div class="particle">✦</div>
@@ -570,8 +513,6 @@
     <div class="particle">♡</div>
 
 
-
-    <!-- CARD -->
 
     <div class="card">
 
@@ -598,8 +539,6 @@
             </div>
 
 
-
-            <!-- TERMINAL -->
 
             <div class="terminal">
 
@@ -643,8 +582,6 @@
 
 
 
-            <!-- GAME -->
-
             <div class="game-box">
 
 
@@ -682,15 +619,16 @@
 
 
 
-            <!-- BUTTON -->
+            <!-- DOWNLOAD GAME -->
 
-            <button
+            <a
                 class="button"
-                onclick="openGame()">
+                href="https://github.com/666death/birthday-quest/releases/download/v1.0.0/BIRTHDAY.QUEST.exe"
+            >
 
                 [ OPEN YOUR GIFT 🎁 ]
 
-            </button>
+            </a>
 
 
 
@@ -704,27 +642,6 @@
         </div>
 
     </div>
-
-
-
-    <script>
-
-
-        function openGame() {
-
-            /*
-             * NANTI BAGIAN INI AKAN
-             * KITA HUBUNGKAN KE GAME / EXE.
-             */
-
-            alert(
-                "THE GAME IS WAITING FOR YOU 😼🎁"
-            );
-
-        }
-
-
-    </script>
 
 
 </body>
