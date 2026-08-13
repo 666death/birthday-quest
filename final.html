@@ -49,10 +49,14 @@
 
             padding: 20px;
 
-            overflow: hidden;
+            overflow-x: hidden;
 
         }
 
+
+        /* =========================
+           FLOATING PARTICLES
+        ========================= */
 
         .particle {
 
@@ -71,32 +75,47 @@
 
 
         .particle:nth-child(1) {
+
             left: 10%;
+
             animation-delay: 0s;
+
         }
 
 
         .particle:nth-child(2) {
+
             left: 25%;
+
             animation-delay: 1.5s;
+
         }
 
 
         .particle:nth-child(3) {
+
             left: 50%;
+
             animation-delay: 3s;
+
         }
 
 
         .particle:nth-child(4) {
+
             left: 75%;
+
             animation-delay: 2s;
+
         }
 
 
         .particle:nth-child(5) {
+
             left: 90%;
+
             animation-delay: 4s;
+
         }
 
 
@@ -140,6 +159,10 @@
 
         }
 
+
+        /* =========================
+           MAIN CARD
+        ========================= */
 
         .card {
 
@@ -207,6 +230,10 @@
         }
 
 
+        /* =========================
+           ICON
+        ========================= */
+
         .icon {
 
             font-size: 60px;
@@ -239,6 +266,10 @@
         }
 
 
+        /* =========================
+           LABEL
+        ========================= */
+
         .label {
 
             margin-top: 20px;
@@ -252,6 +283,10 @@
 
         }
 
+
+        /* =========================
+           TITLE
+        ========================= */
 
         h1 {
 
@@ -282,6 +317,10 @@
 
         }
 
+
+        /* =========================
+           TERMINAL
+        ========================= */
 
         .terminal {
 
@@ -320,19 +359,32 @@
 
 
         .green {
-            color: #9ff0b8;
+
+            color:
+                #9ff0b8;
+
         }
 
 
         .pink {
-            color: #ff9cda;
+
+            color:
+                #ff9cda;
+
         }
 
 
         .white {
-            color: #eee;
+
+            color:
+                #eee;
+
         }
 
+
+        /* =========================
+           GAME BOX
+        ========================= */
 
         .game-box {
 
@@ -386,9 +438,81 @@
         }
 
 
+        /* =========================
+           FINAL REWARD WARNING
+        ========================= */
+
+        .warning-box {
+
+            margin-top:
+                20px;
+
+            padding:
+                20px;
+
+            border:
+                1px dashed
+                rgba(255,156,218,0.35);
+
+            border-radius:
+                6px;
+
+            background:
+                rgba(255,156,218,0.03);
+
+            text-align:
+                center;
+
+        }
+
+
+        .warning-title {
+
+            color:
+                #ff9cda;
+
+            font-size:
+                11px;
+
+            letter-spacing:
+                2px;
+
+        }
+
+
+        .warning-text {
+
+            margin-top:
+                12px;
+
+            color:
+                #777;
+
+            font-size:
+                10px;
+
+            line-height:
+                1.8;
+
+        }
+
+
+        .warning-text span {
+
+            color:
+                #eee;
+
+        }
+
+
+        /* =========================
+           DOWNLOAD BUTTON
+        ========================= */
+
         .button {
 
-            display: inline-block;
+            display:
+                inline-block;
 
             margin-top:
                 30px;
@@ -447,6 +571,10 @@
         }
 
 
+        /* =========================
+           FOOTER
+        ========================= */
+
         .footer {
 
             margin-top:
@@ -464,12 +592,24 @@
         }
 
 
+        /* =========================
+           MOBILE
+        ========================= */
+
         @media (max-width: 600px) {
+
+            body {
+
+                padding:
+                    12px;
+
+            }
+
 
             .inner {
 
                 padding:
-                    45px 20px;
+                    40px 18px;
 
             }
 
@@ -492,6 +632,26 @@
 
             }
 
+
+            .game-description,
+            .warning-text {
+
+                font-size:
+                    9px;
+
+            }
+
+
+            .button {
+
+                padding:
+                    14px 20px;
+
+                font-size:
+                    10px;
+
+            }
+
         }
 
     </style>
@@ -502,9 +662,7 @@
 <body>
 
 
-    <div class="particle">♡</div>
-
-    <div class="particle">✦</div>
+    <!-- FLOATING PARTICLES -->
 
     <div class="particle">♡</div>
 
@@ -512,22 +670,34 @@
 
     <div class="particle">♡</div>
 
+    <div class="particle">✦</div>
 
+    <div class="particle">♡</div>
+
+
+
+    <!-- MAIN CARD -->
 
     <div class="card">
 
         <div class="inner">
 
 
+            <!-- ICON -->
+
             <div class="icon">
                 🎁
             </div>
 
 
+            <!-- SYSTEM LABEL -->
+
             <div class="label">
                 SYSTEM STATUS // COMPLETE
             </div>
 
+
+            <!-- TITLE -->
 
             <h1>
                 QUEST UNLOCKED
@@ -540,47 +710,51 @@
 
 
 
+            <!-- TERMINAL -->
+
             <div class="terminal">
 
 
                 <div>
-                    > scanning archive...
+                    &gt; scanning archive...
                 </div>
 
 
                 <div>
-                    > verifying recipient...
+                    &gt; verifying recipient...
                 </div>
 
 
                 <div class="green">
-                    > recipient confirmed: IMANEL
+                    &gt; recipient confirmed: IMANEL
                 </div>
 
 
                 <div>
-                    > checking quest status...
+                    &gt; checking quest status...
                 </div>
 
 
                 <div class="pink">
-                    > all levels completed.
+                    &gt; all levels completed.
                 </div>
 
 
                 <div class="white">
-                    > final reward unlocked.
+                    &gt; final reward unlocked.
                 </div>
 
 
                 <div class="green">
-                    > system says: go get your gift.
+                    &gt; system says: go get your gift.
                 </div>
 
 
             </div>
 
 
+
+            <!-- GAME INFORMATION -->
 
             <div class="game-box">
 
@@ -619,6 +793,44 @@
 
 
 
+            <!-- FINAL WARNING -->
+
+            <div class="warning-box">
+
+
+                <div class="warning-title">
+                    ⚠️ FINAL REWARD DETECTED
+                </div>
+
+
+                <div class="warning-text">
+
+                    uh-oh...
+
+                    <br><br>
+
+                    this one isn't meant for your phone. 💀
+
+                    <br><br>
+
+                    go find a computer.
+                    <br>
+
+                    don't ask why.
+
+                    <br><br>
+
+                    <span>
+                        just trust the mighty cat. 🐈‍⬛
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+
             <!-- DOWNLOAD GAME -->
 
             <a
@@ -631,6 +843,8 @@
             </a>
 
 
+
+            <!-- FOOTER -->
 
             <div class="footer">
 
